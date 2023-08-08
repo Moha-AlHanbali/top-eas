@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,22 @@
     <script src="./app.js" defer></script>
     <title>TOP-EAS</title>
 </head>
+
 <body>
-    <div class="grid-container"></div>
+    <div>
+        <form class="grid-size-form">
+            <label for="gridX">X Dimension</label>
+            <input type="number" max="100" min="1" class="grid-x-field" name="gridX">
+            <label for="gridY">Y Dimension</label>
+
+            <input type="number" max="100" min="1" class="grid-y-field" name="gridY">
+
+            <button type="submit" class="resize-button">
+                Resize
+            </button>
+        </form>
+    </div>
+    <div class="board-container"></div>
 </body>
+
 </html>
