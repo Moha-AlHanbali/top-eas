@@ -10,6 +10,10 @@ boardContainer.appendChild(gridContainer)
 for (let i = 0; i < 16 * 16; i++) {
     const gridSquare = document.createElement('div');
     gridSquare.classList.add("grid-square", `square-${i}`);
+    gridSquare.addEventListener('click', (e) => {
+        console.log(e.target)
+        e.target.style.backgroundColor = currentColor;
+    })
     gridContainer.appendChild(gridSquare);
 }
 
@@ -33,6 +37,17 @@ gridResizeForm.addEventListener("submit", (e) => {
         const gridSquare = document.createElement('div');
         gridSquare.classList.add("grid-square", `square-${i}`);
         gridSquare.style.flex = `1 1 ${100 / gridX}%`;
+        gridSquare.addEventListener('click', (e) => {
+            console.log(e.target)
+            e.target.style.backgroundColor = currentColor;
+        })
         gridContainer.appendChild(gridSquare);
     }
+})
+
+let currentColor = "#000000"
+
+const colorPicker = document.getElementsByClassName("color-picker")[0];
+colorPicker.addEventListener("input", (e) => {
+    currentColor = e.target.value;
 })

@@ -10,20 +10,28 @@
 </head>
 
 <body>
-    <div>
-        <form class="grid-size-form">
-            <label for="gridX">X Dimension</label>
-            <input type="number" max="100" min="1" class="grid-x-field" name="gridX">
-            <label for="gridY">Y Dimension</label>
+    <h1> Etch-a-Sketch</h1>
+    <div class="main-container">
+        <div class="options-container">
+            <form class="grid-size-form">
 
-            <input type="number" max="100" min="1" class="grid-y-field" name="gridY">
+                <label for="gridX">X Dimension</label>
+                <input type="number" max="100" min="1" class="grid-x-field" name="gridX">
+                <label for="gridY">Y Dimension</label>
 
-            <button type="submit" class="resize-button">
-                Resize
-            </button>
-        </form>
+                <input type="number" max="100" min="1" class="grid-y-field" name="gridY">
+
+                <button type="submit" class="resize-button">
+                    Resize
+                </button>
+
+            </form>
+            <div class="color-picker-container">
+                <input type="color" class="color-picker" name="colorPicker">
+            </div>
+        </div>
+        <div class="board-container"></div>
     </div>
-    <div class="board-container"></div>
 </body>
 
 </html>
