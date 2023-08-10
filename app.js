@@ -6,16 +6,25 @@ let gridContainer = document.createElement("div");
 gridContainer.classList.add("grid-container")
 boardContainer.appendChild(gridContainer)
 
+gridContainer.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains('grid-square')) {
+        e.target.style.backgroundColor = currentColor;
+    }
+});
+
+gridContainer.addEventListener('mouseover', (e) => {
+    if (e.target.classList.contains('grid-square') && e.buttons === 1) {
+        e.target.style.backgroundColor = currentColor;
+    }
+});
 
 for (let i = 0; i < 16 * 16; i++) {
     const gridSquare = document.createElement('div');
     gridSquare.classList.add("grid-square", `square-${i}`);
-    gridSquare.addEventListener('click', (e) => {
-        console.log(e.target)
-        e.target.style.backgroundColor = currentColor;
-    })
     gridContainer.appendChild(gridSquare);
 }
+
 
 const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
 gridResizeForm.addEventListener("submit", (e) => {
