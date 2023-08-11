@@ -60,3 +60,63 @@ const colorPicker = document.getElementsByClassName("color-picker")[0];
 colorPicker.addEventListener("input", (e) => {
     currentColor = e.target.value;
 })
+
+const colorPickerContainer = document.getElementsByClassName("color-picker-container")[0];
+const colorSlotsContainer = document.createElement("div");
+colorSlotsContainer.classList.add("color-slots-container");
+colorPickerContainer.appendChild(colorSlotsContainer);
+
+for (let i = 0; i < 8; i++) {
+    const colorSlotSquare = document.createElement('div');
+    const colorSlotClear = document.createElement('div');
+
+    colorSlotSquare.classList.add("color-slot", `slot-${i}`);
+    colorSlotClear.classList.add("color-slot-clear", `slot-clear-${i}`);
+
+    colorSlotsContainer.appendChild(colorSlotSquare);
+    colorSlotSquare.appendChild(colorSlotClear);
+
+    colorSlotSquare.addEventListener('click', (e) => {
+        if (!e.target.style.backgroundColor || e.target.style.backgroundColor === "rgb(255, 255, 255)") {
+            e.target.style.backgroundColor = currentColor;
+        } else {
+            currentColor = e.target.style.backgroundColor;
+            console.log(currentColor)
+            const inputString = currentColor;
+            const rgbValues = extractRGBFromString(inputString);
+            colorPicker.value = rgbToHex(rgbValues[0], rgbValues[1], rgbValues[2]);
+        }
+    })
+
+    colorSlotClear.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const parentSlot = document.getElementsByClassName(`slot-${i}`)[0]
+        parentSlot.style.backgroundColor = "#ffffff";
+        currentColor = "#ffffff";
+        colorPicker.value = "#ffffff";
+    })
+
+}
+
+
+function extractRGBFromString(inputString) {
+    const rgbRegex = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+    const match = inputString.match(rgbRegex);
+
+    if (match) {
+        const [_, r, g, b] = match;
+        return [parseInt(r), parseInt(g), parseInt(b)];
+    } else {
+        return null;
+    }
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}

@@ -74,3 +74,33 @@
     flex: auto;
 
 }
+
+.color-slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12.5%;
+
+}
+
+.color-slot {
+    position: relative;
+    flex: 1 1 12.5%;
+    aspect-ratio: 1 / 1;
+    outline: 1px solid black;
+    margin-top: 12.5%;
+    z-index: 1;
+}
+
+.color-slot:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px #dbdbdb;
+}
+
+.color-slot-clear {
+    background-color: #ffffff;
+    position: absolute;
+    outline: 1px solid black;
+    aspect-ratio: 1 / 1;
+    height: 30%;
+    left: 0px;
+}
