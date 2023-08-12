@@ -1,30 +1,42 @@
 "use strict";
 
 const boardContainer = document.getElementsByClassName("board-container")[0];
-
 let gridContainer = document.createElement("div");
 gridContainer.classList.add("grid-container")
 boardContainer.appendChild(gridContainer)
 
-gridContainer.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    if (e.target.classList.contains('grid-square')) {
-        e.target.style.backgroundColor = currentColor;
-    }
-});
+const watchGridContainer = () => {
+    gridContainer.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        if (e.target.classList.contains('grid-square')) {
+            e.target.style.backgroundColor = currentColor;
+        }
+    });
 
-gridContainer.addEventListener('mouseover', (e) => {
-    if (e.target.classList.contains('grid-square') && e.buttons === 1) {
-        e.target.style.backgroundColor = currentColor;
-    }
-});
-
-for (let i = 0; i < 16 * 16; i++) {
-    const gridSquare = document.createElement('div');
-    gridSquare.classList.add("grid-square", `square-${i}`);
-    gridContainer.appendChild(gridSquare);
+    gridContainer.addEventListener('mouseover', (e) => {
+        if (e.target.classList.contains('grid-square') && e.buttons === 1) {
+            e.target.style.backgroundColor = currentColor;
+        }
+    });
 }
 
+const generateDefaultGrid = () => {
+    for (let i = 0; i < 16 * 16; i++) {
+        const gridSquare = document.createElement('div');
+        gridSquare.classList.add("grid-square", `square-${i}`);
+        gridContainer.appendChild(gridSquare);
+    }
+}
+
+generateDefaultGrid();
+watchGridContainer();
+
+const regenerateGridContainer = () => {
+    gridContainer.remove()
+    gridContainer = document.createElement("div");
+    gridContainer.classList.add("grid-container");
+    boardContainer.appendChild(gridContainer);
+}
 
 const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
 gridResizeForm.addEventListener("submit", (e) => {
@@ -37,10 +49,7 @@ gridResizeForm.addEventListener("submit", (e) => {
         return;
     }
 
-    gridContainer.remove()
-    gridContainer = document.createElement("div");
-    gridContainer.classList.add("grid-container");
-    boardContainer.appendChild(gridContainer);
+    regenerateGridContainer();
 
     for (let i = 0; i < gridX * gridY; i++) {
         const gridSquare = document.createElement('div');
@@ -120,3 +129,10 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
+const resetButton = document.getElementsByClassName("reset-button")[0];
+resetButton.addEventListener('click', (e) => {
+    regenerateGridContainer();
+    generateDefaultGrid();
+    watchGridContainer();
+});
