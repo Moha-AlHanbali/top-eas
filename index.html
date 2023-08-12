@@ -15,20 +15,16 @@
         <div class="options-container">
             <form class="grid-size-form">
 
-                <label for="gridX">X Dimension</label>
-                <input type="number" max="100" min="1" class="grid-x-field" name="gridX">
-                <label for="gridY">Y Dimension</label>
-
-                <input type="number" max="100" min="1" class="grid-y-field" name="gridY">
-
+                <label for="gridX">Grid Size</label>
+                <input type="number" max="100" min="1" class="grid-squares" name="gridSquares">
                 <button type="submit" class="resize-button">
                     Resize
                 </button>
+                <input type="button" class="reset-button" name="resetButton" value="Reset">
 
             </form>
             <div class="color-picker-container">
                 <input type="color" class="color-picker" name="colorPicker">
-                <input type="button" class="reset-button" name="resetButton" value="Reset">
             </div>
         </div>
         <div class="board-container"></div>

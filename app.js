@@ -41,24 +41,21 @@ const regenerateGridContainer = () => {
 const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
 gridResizeForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    let gridX = e.target.gridX.value;
-    let gridY = e.target.gridY.value;
-    if (!gridX || !gridY) {
-        alert("Please enter both grid dimensions");
+    let gridSquares = e.target.gridSquares.value;
+    if (!gridSquares) {
+        alert("Please enter grid dimensions");
         return;
     }
-    e.target.gridX.value = null;
-    e.target.gridY.value = null;
+    e.target.gridSquares.value = null;
 
     regenerateGridContainer();
     watchGridContainer();
 
-    for (let i = 0; i < gridX * gridY; i++) {
+    for (let i = 0; i < gridSquares * gridSquares; i++) {
         const gridSquare = document.createElement('div');
         gridSquare.classList.add("grid-square", `square-${i}`);
-        gridSquare.style.flex = `1 1 ${100 / gridX}%`;
+        gridSquare.style.flex = `1 1 ${100 / gridSquares}%`;
         gridSquare.addEventListener('click', (e) => {
-            console.log(e.target)
             e.target.style.backgroundColor = currentColor;
         })
         gridContainer.appendChild(gridSquare);
@@ -92,7 +89,6 @@ for (let i = 0; i < 8; i++) {
             e.target.style.backgroundColor = currentColor;
         } else {
             currentColor = e.target.style.backgroundColor;
-            console.log(currentColor)
             const inputString = currentColor;
             const rgbValues = extractRGBFromString(inputString);
             colorPicker.value = rgbToHex(rgbValues[0], rgbValues[1], rgbValues[2]);
