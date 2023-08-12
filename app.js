@@ -41,15 +41,17 @@ const regenerateGridContainer = () => {
 const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
 gridResizeForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const gridX = e.target.gridX.value;
-    const gridY = e.target.gridY.value;
-
+    let gridX = e.target.gridX.value;
+    let gridY = e.target.gridY.value;
     if (!gridX || !gridY) {
         alert("Please enter both grid dimensions");
         return;
     }
+    e.target.gridX.value = null;
+    e.target.gridY.value = null;
 
     regenerateGridContainer();
+    watchGridContainer();
 
     for (let i = 0; i < gridX * gridY; i++) {
         const gridSquare = document.createElement('div');
