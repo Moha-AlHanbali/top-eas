@@ -10,21 +10,25 @@
 </head>
 
 <body>
-    <h1> Etch-a-Sketch</h1>
+    <h1 class="page-header"> Etch-a-Sketch</h1>
     <div class="main-container">
         <div class="options-container">
             <form class="grid-size-form">
 
-                <label for="gridX">Grid Size</label>
+                <label for="gridSquares">Grid Size</label>
                 <input type="number" max="100" min="1" class="grid-squares" name="gridSquares">
-                <button type="submit" class="resize-button">
+                <button type="submit" class="resize-button" name="resizeButton" value="Resize">
                     Resize
                 </button>
-                <input type="button" class="reset-button" name="resetButton" value="Reset">
-
+                <button type="button" class="reset-button" name="resetButton">
+                    Reset
+                </button>
             </form>
             <div class="color-picker-container">
-                <input type="color" class="color-picker" name="colorPicker">
+                <div class="color-input-container">
+                    <input type="color" class="color-picker" name="colorPicker">
+                    <p class="usage-note"> * Use the smaller square in each slot to reset it</p>
+                </div>
             </div>
         </div>
         <div class="board-container"></div>
