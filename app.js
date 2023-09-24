@@ -1,9 +1,24 @@
 "use strict";
 
+let currentColor = "#000000"
+
 const boardContainer = document.getElementsByClassName("board-container")[0];
+const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
+const colorPicker = document.getElementsByClassName("color-picker")[0];
+const resetButton = document.getElementsByClassName("reset-button")[0];
+const colorPickerContainer = document.getElementsByClassName("color-picker-container")[0];
+
+const colorSlotsContainer = document.createElement("div");
+colorSlotsContainer.classList.add("color-slots-container");
+colorPickerContainer.appendChild(colorSlotsContainer);
+
 let gridContainer = document.createElement("div");
 gridContainer.classList.add("grid-container")
 boardContainer.appendChild(gridContainer)
+
+colorPicker.addEventListener("input", (e) => {
+    currentColor = e.target.value;
+})
 
 const watchGridContainer = () => {
     gridContainer.addEventListener('mousedown', (e) => {
@@ -28,9 +43,6 @@ const generateDefaultGrid = () => {
     }
 }
 
-generateDefaultGrid();
-watchGridContainer();
-
 const regenerateGridContainer = () => {
     gridContainer.remove()
     gridContainer = document.createElement("div");
@@ -38,7 +50,6 @@ const regenerateGridContainer = () => {
     boardContainer.appendChild(gridContainer);
 }
 
-const gridResizeForm = document.getElementsByClassName("grid-size-form")[0];
 gridResizeForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let gridSquares = e.target.gridSquares.value;
@@ -61,18 +72,6 @@ gridResizeForm.addEventListener("submit", (e) => {
         gridContainer.appendChild(gridSquare);
     }
 })
-
-let currentColor = "#000000"
-
-const colorPicker = document.getElementsByClassName("color-picker")[0];
-colorPicker.addEventListener("input", (e) => {
-    currentColor = e.target.value;
-})
-
-const colorPickerContainer = document.getElementsByClassName("color-picker-container")[0];
-const colorSlotsContainer = document.createElement("div");
-colorSlotsContainer.classList.add("color-slots-container");
-colorPickerContainer.appendChild(colorSlotsContainer);
 
 for (let i = 0; i < 8; i++) {
     const colorSlotSquare = document.createElement('div');
@@ -103,7 +102,6 @@ for (let i = 0; i < 8; i++) {
         currentColor = "#ffffff";
         colorPicker.value = "#ffffff";
     })
-
 }
 
 
@@ -128,9 +126,11 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-const resetButton = document.getElementsByClassName("reset-button")[0];
 resetButton.addEventListener('click', (e) => {
     regenerateGridContainer();
     generateDefaultGrid();
     watchGridContainer();
 });
+
+generateDefaultGrid();
+watchGridContainer();
